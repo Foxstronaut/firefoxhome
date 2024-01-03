@@ -1,0 +1,618 @@
+<!doctype html><html><head><style type="text/css">* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	min-height: 100%
+}
+
+body {
+	background-image: radial-gradient(#0000ff, #0000ff, #0000ff);
+}
+
+footer {
+	margin-right: 10px;
+	text-align: right;
+	margin-bottom: 10px;
+	font-size: 10pt;
+}
+
+hr {
+	margin: auto;
+	width: 25vw;
+	align-self: center;
+	background-color: #959595;
+	height: 3px;
+	border-radius: 2px;
+	border: none;
+}
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+	font-size: 12pt;
+	font-weight: normal;
+	line-height: 140%;
+	font-family: "Source Sans Pro", "Open Sans", Verdana, Arial, sans-serif;
+}
+
+.mainscreen {
+	margin-top: 30vh;
+	margin-left: 20vh;
+	margin-right: 20vh;
+	text-align: center;
+}
+
+.text {
+	color: #36363a;
+}
+
+#searchbar {
+	border-style: border-box;
+	border: none;
+	width: 20vw;
+	height: 45px;
+	border-radius: 6px;
+	text-align: center;
+	font-size: 11pt;
+	outline: none;
+	background-color: #cccccf;
+	color: #36363a;
+	transition: background-color 0.1s ease-in-out;
+}
+
+#searchbar:focus {
+	background-color: #2a2a5c;
+	transition: background-color 0.1s ease;
+}
+
+
+#hrfocus {
+	background-color: #959595;
+	transition: background-color 0.1s ease-in-out;
+}
+
+#searchbar:focus ~ div ~ #hrfocus {
+	background-color: #a9a9c2;
+	transition: background-color 0.1s ease-in-out;
+}
+
+.headers {
+	color: #36363a;
+	font-family: "Open Sans", "Noto Sans", "Source Sans Pro", Verdana, Arial, sans-serif;
+	font-weight: 500;
+	padding-bottom: 45px;
+}
+
+.hoverlink {
+	color: unset;
+	text-decoration: none;
+}
+
+.hoverlink:hover {
+	text-decoration-line: underline;
+}
+
+.hoverlink:active {
+	color: #26262a;
+}
+
+#settings {
+	margin: 6px 10px 10px 10px;
+	box-sizing: border-box;
+	width: 30px;
+	position: absolute;
+	z-index: 2;
+	display: block;
+}
+
+
+#settings:hover, #settings_open:hover {
+	cursor: pointer;
+}
+
+.settings_menu {
+	position: absolute;
+	padding-top: 40px;
+	width: 15vw;
+	min-height: 100%;
+	background-color: rgba(60, 60, 74, 0.2);
+	color: #49494e;
+	z-index: 1;
+	transition: opacity 1s ease;
+	visibility: hidden;
+	transform: translateX(-15vw);
+	backdrop-filter: blur(3px);
+}
+
+.menuline {
+	box-sizing: border-box;
+	margin-top: 4px;
+	margin-bottom: 4px;
+
+	width: 35px;
+	height: 4px;
+	border-radius: 5px;
+	background-color: #aaaaad;
+	transition: background-color 0.2s ease;
+}
+
+#settings_open {
+	display: none;
+	margin: 6px 10px 10px 10px;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 2;
+	display: none;
+}
+
+.line1 {
+	margin-bottom: 20px;
+	transform: translateY(12px) rotate(45deg);
+}
+
+.line2 {
+	transform: translateY(-12px) rotate(-45deg);
+}
+
+.line1, .line2 {
+	width: 35px;
+	height: 4px;
+	background-color: #aaaaad;
+	transition: background-color 0.2s ease;
+}
+
+
+
+.settings_header {
+	font-weight: 400;
+	font-size: 14pt;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.settings_text {
+	margin-top: 25px;
+	text-align: center;
+	align-items: center;
+	font-family: Open Sans;
+}
+
+button#apply, select {
+	width: 100px;
+	height: 30px;
+	background-color: #e2e2e6;
+	color: inherit;
+	border-color: #a2a2a8;
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+
+select, option {
+	vertical-align: middle;
+
+	border: none;
+	font-weight: 500;
+	margin-top: auto;
+	margin-bottom: auto;
+	text-align: center;
+}
+
+.icons {
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.icons a {
+	text-decoration: none;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.icons a img {
+	filter: invert(calc(50/255));
+	transition: filter 0.2s ease-in-out;
+}
+
+.icons a img:hover {
+	filter: invert(calc(100/255));
+	transition: filter 0.2s ease-in-out;
+}
+
+#settings_applied {
+	margin-top: 10px;
+	font-size: 11pt;
+	color: #49494e;
+}
+
+noscript {
+	color: inherit;
+}
+
+@media only screen and (max-width: 600px)
+{
+	
+	.mainscreen {
+		width: calc(20vw - 600px/100vw);
+		margin-left: 10vw;
+		margin-right: 10vw;
+	}
+}
+
+@media only screen and (max-width: 720px)
+{
+	button#apply, select {
+		width: 100px;
+	}
+	.mainscreen {
+		margin-left: 10vw;
+		margin-right: 10vw;
+	}
+}
+
+@media only screen and (max-width: 864px)
+{
+	hr {
+		width: 216px;
+	}
+}
+
+@media only screen and (max-width: 360px)
+{
+	hr {
+		width: 60vw;
+	}
+}
+
+@media only screen and (max-width: 992px)
+{
+	#searchbar {
+		width: 198.4px;
+	}
+	.settings_menu {
+		width: 148.8px;
+	}
+}
+
+@media only screen and (min-width: 1536px)
+{
+	.settings_menu {
+		width: 230.4px;
+	}
+}
+
+@media only screen and (max-height: 320px) /* For extremely low resolutions */
+{
+	.mainscreen {
+		margin-top: 96px;
+	}
+
+}
+
+/* Themes */
+@media only screen and (prefers-color-scheme: dark)
+{
+	button#apply, select {
+		background-color: #56565b;
+		color: inherit;
+		border-color: #626268;
+	}
+	.settings_menu {
+
+		background-color: rgba(160, 160, 174, 0.2);
+		color: #d4d4d7;
+	}
+
+	#settings_applied {
+		color: #d4d4d7;
+	}
+
+	.showmenu {
+		color: #9f9fa4;
+	}
+
+	.menuline {
+		background-color: #80808b;
+	}
+
+	#settings:hover .menuline, #settings_open:hover div {
+		background-color: #d4d4d7;
+	}
+
+	body {
+		background-image: radial-gradient(#1e1e24, #202025, #1e1e24);
+	}
+
+	hr, #hrfocus {
+		background-color: #656565;
+	}
+
+	#searchbar:focus ~ div ~ #hrfocus {
+		background-color: #8f8f90;
+	}
+
+	.text {
+		color: #dfdfe3;
+	}
+
+	#searchbar {
+		background-color: #29292d;
+		color: #9f9fa4;
+	}
+
+	#searchbar:focus {
+		background-color: #353539;
+	}
+
+	.headers {
+		color: #b3b3b3;
+	}
+	
+	.icons a img {
+		filter: invert(calc(0/255));
+	}
+
+	.icons a img:hover {
+		filter: invert(calc(255/255));
+	}
+
+}
+</style></head><body><!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Open+Sans:wght@400;500;700&display=swap"
+		rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Simple homepage for any browser, with customizable search engine." />
+	<title>Homepage</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://anic17.github.io/homepage/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://anic17.github.io/homepage/assets/favicon/favicon-16x16.png">
+
+</head>
+
+<body>
+
+	<div class="layout">
+
+		<!-- Begins the settings part -->
+		<div id="settings" onclick="showSettings(event)" title="Open the settings">
+			<div class="menuline"></div>
+			<div class="menuline"></div>
+			<div class="menuline"></div>
+		</div>
+		<div id="settings_open" onclick="showSettings(event)" title="Close the settings">
+			<div class="line1">
+			</div>
+			<div class="line2">
+			</div>
+		</div>
+		<div class="settings_menu">
+			<div class="settings_text">
+				<h1>Settings</h1>
+				<br>
+				<div class="settings_header">
+					Default search engine
+				</div>
+
+				<select id="settings_engine" title="Choose the search engine">
+					<option value="DuckDuckGo">DuckDuckGo</option>
+					<option value="Google">Google</option>
+					<option value="Ecosia">Ecosia</option>
+					<option value="Brave">Brave</option>
+					<option value="Bing">Bing</option>
+					<option value="Yahoo">Yahoo</option>
+				</select>
+				<br>
+				<br>
+				<button id="apply" onclick="applySettings()" title="Apply the new settings">
+					Apply
+				</button>
+				<br>
+				<div id="settings_applied">
+					Settings successfully applied
+				</div>
+			</div>
+			<br>
+		</div>
+			<!-- Ends the settings part -->
+
+			<!-- Begins the start page -->
+			<div class="mainscreen">
+				<noscript class="text headers">
+					<h1>This page requires JavaScript to work</h1>
+					<br>
+					<br>
+			</noscript>
+
+					<h1 class="headers">Homepage</h1>
+
+					<input id="searchbar" type="text" placeholder="Search with DuckDuckGo" title="Search the web" autofocus>
+
+					<div class="icons">
+						<a href="https://github.com"><img
+	       	     width=60 height=60 src="https://github.com/fluidicon.png" title="GitHub"></a>
+            <a href="https://youtube.com"><img
+	       	     width=60 height=60 src="https://www.youtube.com/img/desktop/yt_1200.png" title="YouTube"></a>
+            <a href="https://www.autotempest.com/"><img
+	       	     width=60 height=60 src="https://static.autotempest.com/prod/build/main/favicons/apple-touch-icon-76x76.3a47f4fe.png" title="AutoTempest"></a>
+				    <a href="https://jsitor.com/"><img
+					       	     width=60 height=60 src="https://jsitor.com/logo-jsitor.png" title="Jsitor"></a>					</div>
+					<hr id="hrfocus">
+
+					<br>
+
+
+		</div>
+					
+			</div>
+			<script src="index.js"></script>
+</body>
+
+</html><script type="text/javascript">/* Cookie functions */
+
+function setCookie(name, value, exp_days) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exp_days * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  var cname = name + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cname) == 0) {
+      return c.substring(cname.length, c.length);
+    }
+  }
+  return "";
+}
+
+/* Engine selection */
+
+const englist = [
+  "DuckDuckGo",
+  "Google",
+  "Ecosia",
+  "Brave",
+  "Bing",
+  "Yahoo"
+];
+const queryurl = [
+  "https://duckduckgo.com/?q=",
+  "https://www.google.com/search?q=",
+  "https://www.ecosia.org/search?q=",
+  "https://search.brave.com/search?q=",
+  "https://www.bing.com/search?q=",
+  "https://search.yahoo.com/search?p="
+];
+
+function setSearchEngine(search) {
+  if (englist.includes(search)) {
+    setCookie("engine", search, 20000);
+    return true;
+  }
+  return false;
+}
+
+
+function setSelectDefault() {
+  document.getElementById('settings_engine').value = getCookie("engine");
+}
+
+function getSearchEngine() {
+  let engine = getCookie("engine");
+
+  let baseurl = null;
+  for (let k = 0; k < englist.length; k++) {
+    if (engine == englist[k]) {
+      baseurl = queryurl[k];
+    }
+  }
+  if (!baseurl) {
+    console.log("Invalid default search engine (got " + engine + ")");
+    engine = "DuckDuckGo";
+  }
+
+  setSearchEngine(engine);
+  setPlaceholder(engine);
+  setSelectDefault();
+  return baseurl;
+}
+
+const searchBox = document.getElementById('searchbar')
+
+searchBox.addEventListener('keydown', (e) => {
+  if (e.code == 'Enter') {
+    let textfield = document.getElementById('searchbar').value;
+    if (textfield) {
+      var regex = new RegExp('^(http://|https://)');
+      let url;
+      if (regex.test(textfield)) {
+        url = textfield;
+      } else {
+        url = getSearchEngine() + encodeURIComponent(textfield);
+      }
+      window.location.href = url;
+    }
+
+  }
+})
+
+function choose(val) {
+  if (val) return "block";
+  else return "none";
+}
+
+function showSettings() {
+  if (typeof showSettings.openc == 'undefined')
+    showSettings.openc = 0;
+  showSettings.openc++;
+
+  showSettings.openc %= 2;
+
+  let showMenu = `
+        visibility: visible;
+        transition: all 0.3s ease;
+        transform: translateX(0px);
+    `;
+  let hideMenu = `
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: 
+    `;
+  let vw = window.innerWidth;
+  if (vw >= 1536) {
+    hideMenu += "translateX(-230.4px);"
+  } else if (vw < 1536 && vw > 992) {
+    hideMenu += "translateX(-15vw);"
+  } else {
+    hideMenu += "translateX(-148.8px);"
+  }
+
+  let settings_height = document.documentElement.getBoundingClientRect().height;
+  document.querySelector('.settings_menu').style.cssText = "min-height: " + settings_height + "px";
+
+  const settings = document.querySelector('.settings_menu');
+
+  showSettings.openc ? (settings.style.cssText = showMenu) : (settings.style.cssText = hideMenu);
+
+
+  document.getElementById("settings_open").setAttribute("style", "display: " + choose(showSettings.openc));
+  document.getElementById("settings").setAttribute("style", "display: " + choose(!showSettings.openc));
+
+  // Hide "Settings applied"
+  document.getElementById("settings_applied").setAttribute("style", "display: none");
+}
+
+function setPlaceholder(eng) {
+  let searchbar = document.getElementById("searchbar");
+  searchbar.placeholder = 'Search with ' + eng;
+}
+
+
+function applySettings() {
+  let engine = document.getElementById("settings_engine").value;
+  if (setSearchEngine(engine))
+    document.getElementById("settings_applied").setAttribute("style", "display: block");
+
+  setPlaceholder(engine);
+  setSelectDefault();
+}
+
+window.onload = getSearchEngine();</script></body><html>
